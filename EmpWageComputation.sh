@@ -1,4 +1,5 @@
 echo "Welcome to Employee Wage Computation Program on Master Branch"
+declare -a dailyWage
 wagePerHour=20
 workingDays=20
 maxHrsInMonth=100
@@ -25,7 +26,9 @@ do
 	
 	random=$((RANDOM%3))
 	workingHr="$( getWorkingHours $random )"
+	dailyWage[i]=$((workingHr*wagePerHour))
 	totalWorkingHr=$((totalWorkingHr+workingHr))
 done
+echo "Daily wage : ${dailyWage[@]}"
 monthSalary=$((wagePerHour*totalWorkingHr))
 echo "Employee monthly wage : $monthSalary"
