@@ -28,6 +28,7 @@ do
 	workingHr="$( getWorkingHours $random )"
 	dailyWage[i]=$((workingHr*wagePerHour))
 	totalWorkingHr=$((totalWorkingHr+workingHr))
+	echo "Day$((i+1)) wage: ${dailyWage[i]}"
 done
 echo "Daily wage : ${dailyWage[@]}"
 monthSalary=$((wagePerHour*totalWorkingHr))
