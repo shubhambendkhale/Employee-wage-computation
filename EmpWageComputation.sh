@@ -1,20 +1,30 @@
 echo "Welcome to Employee Wage Computation Program on Master Branch"
-random=$((RANDOM%3))
+declare -a dailySalary
+monthSalary=0
 wagePerHour=20
 workingHr=0
-case $random in
-	1)
-		echo "Employee present for Full time"
-		workingHr=8
-		;;
-	2)
-		echo "Employee present for Part time"
-		workingHr=4
-		;;
-	*)
-		echo "Employee Absent"
-		workingHr=0
-		;;
-esac
-salary=$((wagePerHour*workingHr))
-echo "Daily employee wage : $salary"
+counter=0
+for (( i=0; i<20; i++ ))
+do
+	random=$((RANDOM%3))
+	case $random in
+		1)
+			workingHr=8
+			;;
+		2)
+			workingHr=4
+			;;
+		*)
+			workingHr=0
+			;;
+	esac
+	dailySalary[((counter++))]=$((workingHr*wagePerHour))
+done
+echo "Daily Salary : ${dailySalary[@]}"
+
+for (( i=0; i<20; i++ ))
+do
+	sal=${dailySalary[i]}
+	monthSalary=$((monthSalary+sal))
+done
+echo "Monthly employee wage : $monthSalary"
