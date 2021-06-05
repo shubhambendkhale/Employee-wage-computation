@@ -1,11 +1,13 @@
 echo "Welcome to Employee Wage Computation Program on Master Branch"
-declare -a dailySalary
-monthSalary=0
+
 wagePerHour=20
-workingHr=0
-counter=0
-for (( i=0; i<20; i++ ))
+workingDays=20
+maxHrsInMonth=100
+monthSalary=0
+totalWorkingHr=0
+for (( i=0; i<$workingDays && $totalWorkingHr<$maxHrsInMonth; i++ ))
 do
+	
 	random=$((RANDOM%3))
 	case $random in
 		1)
@@ -18,13 +20,7 @@ do
 			workingHr=0
 			;;
 	esac
-	dailySalary[((counter++))]=$((workingHr*wagePerHour))
+	totalWorkingHr=$((totalWorkingHr+workingHr))
 done
-echo "Daily Salary : ${dailySalary[@]}"
-
-for (( i=0; i<20; i++ ))
-do
-	sal=${dailySalary[i]}
-	monthSalary=$((monthSalary+sal))
-done
-echo "Monthly employee wage : $monthSalary"
+monthSalary=$((wagePerHour*totalWorkingHr))
+echo "Employee monthly wage : $monthSalary"
